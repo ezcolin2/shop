@@ -1,6 +1,5 @@
 package com.shop.shop.repository;
 
-import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.shop.shop.constant.ItemSellStatus;
 import com.shop.shop.entity.Item;
 import jakarta.persistence.EntityManager;
@@ -31,7 +30,7 @@ class ItemRepositoryTest {
     @DisplayName("상품 저장 테스트")
     public void createItemTest() {
         Item item = new Item();
-        item.setItemNm("테스트 상품");
+        item.setItemName("테스트 상품");
         item.setPrice(10000);
         item.setItemDetail("테스트 상품 상세 설명");
         item.setItemSellStatus(ItemSellStatus.SELL);
@@ -45,7 +44,7 @@ class ItemRepositoryTest {
     public void createItemList() {
         for (int i = 1; i <= 10; i++) {
             Item item = new Item();
-            item.setItemNm("테스트 상품" + i);
+            item.setItemName("테스트 상품" + i);
             item.setPrice(10000 + i);
             item.setItemDetail("테스트 상품 상세 설명" + i);
             item.setItemSellStatus(ItemSellStatus.SELL);
@@ -58,9 +57,9 @@ class ItemRepositoryTest {
 
     @Test
     @DisplayName("상품명 조회 테스트")
-    public void findByItemNmTest() {
+    public void findByItemNameTest() {
         this.createItemList();
-        List<Item> test = itemRepository.findByItemNm("테스트 상품1");
+        List<Item> test = itemRepository.findByItemName("테스트 상품1");
         for (Item item : test) {
             System.out.println(item.toString());
         }
@@ -68,9 +67,9 @@ class ItemRepositoryTest {
 
     @Test
     @DisplayName("상품명 or 상품 상세 설명 테스트")
-    public void findByItemNmOrItemDetailTest() {
+    public void findByItemNameOrItemDetailTest() {
         this.createItemList();
-        List<Item> items = itemRepository.findByItemNmOrItemDetail("테스트 상품1", "테스트 상품 상세 설명6");
+        List<Item> items = itemRepository.findByItemNameOrItemDetail("테스트 상품1", "테스트 상품 상세 설명6");
         for (Item item : items) {
             System.out.println(item.toString());
         }
@@ -99,11 +98,4 @@ class ItemRepositoryTest {
         }
     }
 
-    @Test
-    @DisplayName("querydsl 테스트")
-    public void querydslTest() {
-        this.createItemList();
-        JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(em);
-
-    }
 }

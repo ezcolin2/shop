@@ -18,7 +18,7 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(nullable=false, length=50)
-    private String itemNm;
+    private String itemName;
     @Column(nullable=false, name="price")
     private int price;
     @Column(nullable = false)
